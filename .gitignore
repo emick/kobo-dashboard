@@ -1,0 +1,3 @@
+/.idea/
+# Ignoring my personal deploy script
+deploy.sh

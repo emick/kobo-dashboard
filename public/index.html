@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
+    <title>Dashboard</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #container {
+            border: 1px solid black;
+            width: 605px;
+            height: 695px;
+            margin: auto auto;
+        }
+
+        #inner-container {
+            height: 604px;
+            width: 695px;
+            border: 1px solid gray;
+            -webkit-transform: rotate(90deg) translateY(-100%);
+            -webkit-transform-origin: top left;
+        }
+
+        .uv-line {
+            position: absolute;
+            top: 151px;
+            left: 18px;
+            width: 284px;
+            height: 2px;
+            background-color: black;
+        }
+
+        .image-container {
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+        .caption {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+        }
+
+        .footer-buttons {
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .weekdays img {
+            width: 80px;
+        }
+
+        .weekdays th {
+            font-size: smaller;
+        }
+
+        .current-weekday {
+            background-color: #ccc;
+        }
+
+        .letters {
+            font-size: x-large;
+        }
+
+        .current-letter {
+            background-color: #ccc;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        .numbers {
+            font-size: xx-large;
+        }
+
+        .current-number {
+            background-color: #ccc;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        .days-until-bears img {
+            width: 40px;
+        }
+
+        /*.time-of-days {*/
+        /*    float: right;*/
+        /*    margin-top: -78px;*/
+        /*    margin-right: 20px;*/
+        /*}*/
+
+        .time-of-days img {
+            width: 40px;
+        }
+
+        .current-timeofday {
+            background-color: #ccc;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #ccc;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        .current-link {
+            background-color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="inner-container">
+            <h2><span id="clock"></span></h2>
+
+            <!-- UV -->
+            <table>
+                <tr>
+                    <td class="image-container">
+                        <div class="caption">UV tänään</div>
+                        <div class="uv-line"></div>
+                        <img src="https://cdn.fmi.fi/apps/global-ultraviolet-index/plot.php?location=ut&lang=fi&day=0" alt="UV tänään">
+                    </td>
+<!--                    <td class="image-container">-->
+<!--                        <div class="caption">UV huomenna</div>-->
+<!--                        <div class="uv-line"></div>-->
+<!--                        <img src="https://cdn.fmi.fi/apps/global-ultraviolet-index/plot.php?location=ut&lang=fi&day=1" alt="UV huomenna"/>-->
+<!--                    </td>-->
+                </tr>
+            </table>
+
+            <hr/>
+
+            <!-- Weekdays -->
+            <table class="weekdays" style="width: 90%;">
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th>MAANANTAI</th>-->
+<!--                    <th>TIISTAI</th>-->
+<!--                    <th>KESKIVIIKKO</th>-->
+<!--                    <th>TORSTAI</th>-->
+<!--                    <th>PERJANTAI</th>-->
+<!--                    <th>LAUANTAI</th>-->
+<!--                    <th>SUNNUNTAI</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+                <tbody>
+                <tr>
+                    <td><img src="images/worm.png" alt="Worm"></td>
+                    <td><img src="images/tiger.png" alt="Tiger"></td>
+                    <td><img src="images/fox.png" alt="Fox"></td>
+                    <td><img src="images/cockroach.png" alt="Cockroach"></td>
+                    <td><img src="images/raccoon.png" alt="Raccoon"></td>
+                    <td><img src="images/sloth.png" alt="Sloth"></td>
+                    <td><img src="images/wolf.png" alt="Wolf"></td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td>MA</td>
+                    <td>TI</td>
+                    <td>KE</td>
+                    <td>TO</td>
+                    <td>PE</td>
+                    <td>LA</td>
+                    <td>SU</td>
+                </tr>
+                </tfoot>
+            </table>
+
+            <hr/>
+
+<!--            <div class="letters">-->
+<!--                <span class="letter">A</span>-->
+<!--                <span class="letter">B</span>-->
+<!--                <span class="letter">C</span>-->
+<!--                <span class="letter">D</span>-->
+<!--                <span class="letter">E</span>-->
+<!--                <span class="letter">F</span>-->
+<!--                <span class="letter">G</span>-->
+<!--                <span class="letter">H</span>-->
+<!--                <span class="letter">I</span>-->
+<!--                <span class="letter">J</span>-->
+<!--                <span class="letter">K</span>-->
+<!--                <span class="letter">L</span>-->
+<!--                <span class="letter">M</span>-->
+<!--                <span class="letter">N</span>-->
+<!--                <span class="letter">O</span>-->
+<!--                <span class="letter">P</span>-->
+<!--                <span class="letter">Q</span>-->
+<!--                <span class="letter">R</span>-->
+<!--                <span class="letter">S</span>-->
+<!--                <span class="letter">T</span>-->
+<!--                <span class="letter">U</span>-->
+<!--                <span class="letter">V</span>-->
+<!--                <span class="letter">W</span>-->
+<!--                <span class="letter">X</span>-->
+<!--                <span class="letter">Y</span>-->
+<!--                <span class="letter">Z</span>-->
+<!--                <span class="letter">Å</span>-->
+<!--                <span class="letter">Ä</span>-->
+<!--                <span class="letter">Ö</span>-->
+<!--            </div>-->
+
+<!--            <hr/>-->
+
+<!--            <div class="numbers">-->
+<!--                <span class="number">1</span>-->
+<!--                <span class="number">2</span>-->
+<!--                <span class="number">3</span>-->
+<!--                <span class="number">4</span>-->
+<!--                <span class="number">5</span>-->
+<!--                <span class="number">6</span>-->
+<!--                <span class="number">7</span>-->
+<!--                <span class="number">8</span>-->
+<!--                <span class="number">9</span>-->
+<!--                <span class="number">0</span>-->
+<!--            </div>-->
+
+<!--            <hr/>-->
+
+<!--            <table class="days-until-bears">-->
+<!--                <tbody>-->
+<!--                <tr>-->
+<!--                    <td><img src="images/bear.png" alt="Bear"></td>-->
+<!--                    <td><img src="images/house.png" alt="House"><br/><span id="days-until-bear" style="font-size: x-large"></span></td>-->
+<!--                    <td><img src="images/badger.png" alt="Badger"></td>-->
+<!--                    <td></td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+
+            <table class="time-of-days">
+                <tbody>
+                <tr>
+                    <td><img src="images/sunrise-bw.png" alt="Morning"></td>
+                    <td><img src="images/day-bw.png" alt="Day"></td>
+                    <td><img src="images/sunset-bw.png" alt="Sunset"></td>
+                    <td><img src="images/moon.png" alt="Night"></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <footer>
+                <div class="footer-buttons">
+                    <a href="index.html" class="button">5 min</a>
+                    <a href="index.html?refresh=5" class="button">5 sec</a>
+                    <div id="debug"></div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = ('0' + now.getHours()).slice(-2);
+            var minutes = ('0' + now.getMinutes()).slice(-2);
+            document.getElementById('clock').textContent = hours + ':' + minutes;
+        }
+
+        // updateClock();
+
+        function handleRefresh() {
+            var qd = {};
+            if (location.search) location.search.substr(1).split("&").forEach(function(item) {
+                var s = item.split("="), k = s[0], v = s[1] && decodeURIComponent(s[1]); (qd[k] = qd[k] || []).push(v)
+            })
+
+            var refreshSeconds = qd.refresh
+            if (!refreshSeconds) {
+                refreshSeconds = 5*60
+            }
+
+            if (location.href.indexOf("?refresh") !== -1) {
+                var chosen = document.querySelectorAll('a[href="index.html?refresh=' + refreshSeconds + '"]')
+                chosen[0].className += ' current-link'
+            } else {
+                var first = document.querySelectorAll('a[href="index.html"]')
+                first[0].className += ' current-link'
+            }
+
+            setTimeout(function () {
+                location.reload();
+            }, refreshSeconds * 1000); // Refresh the page at the specified interval
+        }
+
+        handleRefresh();
+
+        function highlightWeekDay() {
+            function getNthAnimalCell(n) {
+                var animalCells = document.querySelectorAll('table.weekdays tbody tr td');
+                console.log(animalCells)
+                return animalCells[n];
+            }
+
+            const weekMap = {
+                1: 0, // → monday
+                2: 1, // → tuesday
+                3: 2, // → wednesday
+                4: 3, // → thursday
+                5: 4, // → friday
+                6: 5, // → saturday
+                0: 6, // → sunday
+            };
+
+            var day = weekMap[(new Date()).getDay()]
+
+            var nthCell = getNthAnimalCell(day);
+            if (nthCell) {
+                nthCell.className += ' current-weekday'
+            }
+        }
+
+        highlightWeekDay();
+
+        // function highlightLetter() {
+        //     function isNumberInRange(n) {
+        //         return n >= 1 && n <= 29;
+        //     }
+        //
+        //     function getDayNumberSinceEpochInRange() {
+        //         var millisecondsPerDay = 24 * 60 * 60 * 1000;
+        //         var currentEpochMilliseconds = Date.now();
+        //         var daysSinceEpoch = Math.floor(currentEpochMilliseconds / millisecondsPerDay);
+        //         return (daysSinceEpoch % 29) + 1;
+        //     }
+        //
+        //     function getNthLetter(n) {
+        //         var cells = document.querySelectorAll('div.letters span.letter');
+        //         return cells[n - 1];
+        //     }
+        //
+        //     var n = getDayNumberSinceEpochInRange();
+        //
+        //     if (isNumberInRange(n)) {
+        //         var nthCell = getNthLetter(n);
+        //         if (nthCell) {
+        //             nthCell.className += ' current-letter'
+        //         }
+        //     }
+        // }
+        //
+        // highlightLetter();
+        //
+        // function highlightNumber() {
+        //     function isNumberInRange(n) {
+        //         return n >= 1 && n <= 10;
+        //     }
+        //
+        //     function getDayNumberSinceEpochInRange() {
+        //         var millisecondsPerDay = 24 * 60 * 60 * 1000;
+        //         var currentEpochMilliseconds = Date.now();
+        //         var daysSinceEpoch = Math.floor(currentEpochMilliseconds / millisecondsPerDay);
+        //         return (daysSinceEpoch % 10) + 1;
+        //     }
+        //
+        //     function getNthNumber(n) {
+        //         var cells = document.querySelectorAll('div.numbers span.number');
+        //         return cells[n - 1];
+        //     }
+        //
+        //     var n = getDayNumberSinceEpochInRange();
+        //
+        //     if (isNumberInRange(n)) {
+        //         var nthCell = getNthNumber(n);
+        //         if (nthCell) {
+        //             nthCell.className += ' current-number'
+        //         }
+        //     }
+        // }
+        //
+        // highlightNumber();
+        //
+        // function setDaysUntilBears() {
+        //     function daysUntil(targetDate, timezone) {
+        //         // Get the current date in the specified timezone
+        //         var now = moment.tz(timezone);
+        //         // Parse the target date in the specified timezone
+        //         var target = moment.tz(targetDate, timezone);
+        //         // Calculate the difference in days
+        //         var daysUntil = target.diff(now, 'days');
+        //         return daysUntil + 1;
+        //     }
+        //
+        //     var targetDate = '2024-08-05';
+        //     var timezone = 'Europe/Helsinki';
+        //     document.getElementById('days-until-bear').textContent = daysUntil(targetDate, timezone);
+        // }
+        //
+        // setDaysUntilBears();
+
+        function highlightTimeOfDay() {
+            function isNumberInRange(n) {
+                return n >= 1 && n <= 4;
+            }
+
+            function getTimeOfDayIndex() {
+                var hour = moment().hour();
+
+                if (hour < 7 || hour >= 21) {
+                    return 4;
+                }
+
+                if (hour < 12) {
+                    return 1;
+                }
+
+                if (hour < 18) {
+                    return 2;
+                }
+
+                if (hour < 22) {
+                    return 3;
+                }
+            }
+
+            function getNthImage(n) {
+                var cells = document.querySelectorAll('table.time-of-days td');
+                return cells[n - 1];
+            }
+
+            var n = getTimeOfDayIndex();
+
+            if (isNumberInRange(n)) {
+                var nthCell = getNthImage(n);
+                if (nthCell) {
+                    nthCell.className += ' current-timeofday'
+                }
+            }
+        }
+
+        highlightTimeOfDay();
+    </script>
+</body>
+</html>
