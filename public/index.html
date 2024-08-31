@@ -75,35 +75,9 @@
             background-color: #ccc;
         }
 
-        .letters {
-            font-size: x-large;
-        }
-
-        .current-letter {
-            background-color: #ccc;
-            border-radius: 8px;
-            padding: 5px;
-        }
-
-        .numbers {
-            font-size: xx-large;
-        }
-
-        .current-number {
-            background-color: #ccc;
-            border-radius: 8px;
-            padding: 5px;
-        }
-
         .days-until-bears img {
             width: 40px;
         }
-
-        /*.time-of-days {*/
-        /*    float: right;*/
-        /*    margin-top: -78px;*/
-        /*    margin-right: 20px;*/
-        /*}*/
 
         .time-of-days img {
             width: 40px;
@@ -137,39 +111,19 @@
 <body>
     <div id="container">
         <div id="inner-container">
-            <h2><span id="clock"></span></h2>
-
-            <!-- UV -->
-            <table>
+            <table class="uv-table">
                 <tr>
                     <td class="image-container">
                         <div class="caption">UV tänään</div>
                         <div class="uv-line"></div>
                         <img src="https://cdn.fmi.fi/apps/global-ultraviolet-index/plot.php?location=ut&lang=fi&day=0" alt="UV tänään">
                     </td>
-<!--                    <td class="image-container">-->
-<!--                        <div class="caption">UV huomenna</div>-->
-<!--                        <div class="uv-line"></div>-->
-<!--                        <img src="https://cdn.fmi.fi/apps/global-ultraviolet-index/plot.php?location=ut&lang=fi&day=1" alt="UV huomenna"/>-->
-<!--                    </td>-->
                 </tr>
             </table>
 
             <hr/>
 
-            <!-- Weekdays -->
             <table class="weekdays" style="width: 90%;">
-<!--                <thead>-->
-<!--                <tr>-->
-<!--                    <th>MAANANTAI</th>-->
-<!--                    <th>TIISTAI</th>-->
-<!--                    <th>KESKIVIIKKO</th>-->
-<!--                    <th>TORSTAI</th>-->
-<!--                    <th>PERJANTAI</th>-->
-<!--                    <th>LAUANTAI</th>-->
-<!--                    <th>SUNNUNTAI</th>-->
-<!--                </tr>-->
-<!--                </thead>-->
                 <tbody>
                 <tr>
                     <td><img src="images/worm.png" alt="Worm"></td>
@@ -196,66 +150,6 @@
 
             <hr/>
 
-<!--            <div class="letters">-->
-<!--                <span class="letter">A</span>-->
-<!--                <span class="letter">B</span>-->
-<!--                <span class="letter">C</span>-->
-<!--                <span class="letter">D</span>-->
-<!--                <span class="letter">E</span>-->
-<!--                <span class="letter">F</span>-->
-<!--                <span class="letter">G</span>-->
-<!--                <span class="letter">H</span>-->
-<!--                <span class="letter">I</span>-->
-<!--                <span class="letter">J</span>-->
-<!--                <span class="letter">K</span>-->
-<!--                <span class="letter">L</span>-->
-<!--                <span class="letter">M</span>-->
-<!--                <span class="letter">N</span>-->
-<!--                <span class="letter">O</span>-->
-<!--                <span class="letter">P</span>-->
-<!--                <span class="letter">Q</span>-->
-<!--                <span class="letter">R</span>-->
-<!--                <span class="letter">S</span>-->
-<!--                <span class="letter">T</span>-->
-<!--                <span class="letter">U</span>-->
-<!--                <span class="letter">V</span>-->
-<!--                <span class="letter">W</span>-->
-<!--                <span class="letter">X</span>-->
-<!--                <span class="letter">Y</span>-->
-<!--                <span class="letter">Z</span>-->
-<!--                <span class="letter">Å</span>-->
-<!--                <span class="letter">Ä</span>-->
-<!--                <span class="letter">Ö</span>-->
-<!--            </div>-->
-
-<!--            <hr/>-->
-
-<!--            <div class="numbers">-->
-<!--                <span class="number">1</span>-->
-<!--                <span class="number">2</span>-->
-<!--                <span class="number">3</span>-->
-<!--                <span class="number">4</span>-->
-<!--                <span class="number">5</span>-->
-<!--                <span class="number">6</span>-->
-<!--                <span class="number">7</span>-->
-<!--                <span class="number">8</span>-->
-<!--                <span class="number">9</span>-->
-<!--                <span class="number">0</span>-->
-<!--            </div>-->
-
-<!--            <hr/>-->
-
-<!--            <table class="days-until-bears">-->
-<!--                <tbody>-->
-<!--                <tr>-->
-<!--                    <td><img src="images/bear.png" alt="Bear"></td>-->
-<!--                    <td><img src="images/house.png" alt="House"><br/><span id="days-until-bear" style="font-size: x-large"></span></td>-->
-<!--                    <td><img src="images/badger.png" alt="Badger"></td>-->
-<!--                    <td></td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--            </table>-->
-
             <table class="time-of-days">
                 <tbody>
                 <tr>
@@ -279,15 +173,6 @@
     </div>
 
     <script>
-        function updateClock() {
-            var now = new Date();
-            var hours = ('0' + now.getHours()).slice(-2);
-            var minutes = ('0' + now.getMinutes()).slice(-2);
-            document.getElementById('clock').textContent = hours + ':' + minutes;
-        }
-
-        // updateClock();
-
         function handleRefresh() {
             var qd = {};
             if (location.search) location.search.substr(1).split("&").forEach(function(item) {
@@ -340,82 +225,6 @@
         }
 
         highlightWeekDay();
-
-        // function highlightLetter() {
-        //     function isNumberInRange(n) {
-        //         return n >= 1 && n <= 29;
-        //     }
-        //
-        //     function getDayNumberSinceEpochInRange() {
-        //         var millisecondsPerDay = 24 * 60 * 60 * 1000;
-        //         var currentEpochMilliseconds = Date.now();
-        //         var daysSinceEpoch = Math.floor(currentEpochMilliseconds / millisecondsPerDay);
-        //         return (daysSinceEpoch % 29) + 1;
-        //     }
-        //
-        //     function getNthLetter(n) {
-        //         var cells = document.querySelectorAll('div.letters span.letter');
-        //         return cells[n - 1];
-        //     }
-        //
-        //     var n = getDayNumberSinceEpochInRange();
-        //
-        //     if (isNumberInRange(n)) {
-        //         var nthCell = getNthLetter(n);
-        //         if (nthCell) {
-        //             nthCell.className += ' current-letter'
-        //         }
-        //     }
-        // }
-        //
-        // highlightLetter();
-        //
-        // function highlightNumber() {
-        //     function isNumberInRange(n) {
-        //         return n >= 1 && n <= 10;
-        //     }
-        //
-        //     function getDayNumberSinceEpochInRange() {
-        //         var millisecondsPerDay = 24 * 60 * 60 * 1000;
-        //         var currentEpochMilliseconds = Date.now();
-        //         var daysSinceEpoch = Math.floor(currentEpochMilliseconds / millisecondsPerDay);
-        //         return (daysSinceEpoch % 10) + 1;
-        //     }
-        //
-        //     function getNthNumber(n) {
-        //         var cells = document.querySelectorAll('div.numbers span.number');
-        //         return cells[n - 1];
-        //     }
-        //
-        //     var n = getDayNumberSinceEpochInRange();
-        //
-        //     if (isNumberInRange(n)) {
-        //         var nthCell = getNthNumber(n);
-        //         if (nthCell) {
-        //             nthCell.className += ' current-number'
-        //         }
-        //     }
-        // }
-        //
-        // highlightNumber();
-        //
-        // function setDaysUntilBears() {
-        //     function daysUntil(targetDate, timezone) {
-        //         // Get the current date in the specified timezone
-        //         var now = moment.tz(timezone);
-        //         // Parse the target date in the specified timezone
-        //         var target = moment.tz(targetDate, timezone);
-        //         // Calculate the difference in days
-        //         var daysUntil = target.diff(now, 'days');
-        //         return daysUntil + 1;
-        //     }
-        //
-        //     var targetDate = '2024-08-05';
-        //     var timezone = 'Europe/Helsinki';
-        //     document.getElementById('days-until-bear').textContent = daysUntil(targetDate, timezone);
-        // }
-        //
-        // setDaysUntilBears();
 
         function highlightTimeOfDay() {
             function isNumberInRange(n) {
