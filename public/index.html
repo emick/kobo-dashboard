@@ -67,12 +67,24 @@
             width: 80px;
         }
 
+        .watering img {
+            width: 40px;
+            padding: 5px;
+            cursor: pointer;
+        }
+
         .weekdays th {
             font-size: smaller;
         }
 
         .current-weekday {
             background-color: #ccc;
+        }
+
+        .current {
+            background-color: #ccc;
+            border-radius: 8px;
+            padding: 5px;
         }
 
         .days-until-bears img {
@@ -111,17 +123,39 @@
 <body>
     <div id="container">
         <div id="inner-container">
-            <table class="uv-table">
-                <tr>
-                    <td class="image-container">
-                        <div class="caption">UV tänään</div>
-                        <div class="uv-line"></div>
-                        <img src="https://cdn.fmi.fi/apps/global-ultraviolet-index/plot.php?location=ut&lang=fi&day=0" alt="UV tänään">
-                    </td>
-                </tr>
+            <table class="weather">
+                <a class="weatherwidget-io" href="https://forecast7.com/en/60d4522d27/turku/" data-label_1="TURKU" data-mode="Current" data-days="3" >TURKU</a>
+                <script>
+                !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                </script>
             </table>
 
             <hr/>
+
+            <div style="width: 50%; float: left;">
+                <table class="uv-table">
+                    <tr>
+                        <td class="image-container">
+                            <div class="caption">UV tänään</div>
+                            <div class="uv-line"></div>
+                            <img src="https://cdn.fmi.fi/apps/global-ultraviolet-index/plot.php?location=ut&lang=fi&day=0" alt="UV tänään">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="width: 50%; float: right;">
+                <table class="uv-table">
+                    <tr>
+                        <td class="watering" style="width: 50%">
+                            <div class="caption">Tehtävät</div>
+                            <img id="watering-icon" src="images/droplet.png" alt="Water flowers">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <hr style="clear:both"/>
 
             <table class="weekdays" style="width: 90%;">
                 <tbody>
@@ -261,12 +295,44 @@
             if (isNumberInRange(n)) {
                 var nthCell = getNthImage(n);
                 if (nthCell) {
-                    nthCell.className += ' current-timeofday'
+                    nthCell.className += ' current'
                 }
             }
         }
 
         highlightTimeOfDay();
+
+        function setupWateringIcon() {
+            var icon = document.getElementById('watering-icon');
+            var storageKey = 'wateringDate';
+
+            function today() {
+                var d = new Date();
+                function pad(n) { return ('0' + n).slice(-2); }
+                return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+            }
+
+            function setChecked(checked) {
+                icon.className = !checked ? 'current' : undefined;
+            }
+
+            icon.addEventListener('click', function () {
+                var stored = localStorage.getItem(storageKey);
+                if (stored === today()) {
+                    setChecked(false);
+                    localStorage.removeItem(storageKey);
+                    return;
+                } else {
+                    localStorage.setItem(storageKey, today());
+                    setChecked(true);
+                }
+            });
+
+            var stored = localStorage.getItem(storageKey);
+            setChecked(stored === today());
+        }
+
+        setupWateringIcon();
     </script>
 </body>
 </html>
