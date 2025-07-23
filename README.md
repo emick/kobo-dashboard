@@ -11,10 +11,6 @@ I built the following dashboard for my children to see what weekday and time of 
 
 ![Example dashboard](example.jpg)
 
-To preview the dashboard for a specific date, append the `today` query parameter
-to the URL. For example `index.html?today=2025-08-22` renders the page as if the
-current day was 22nd August 2025.
-
 ## Live Page
 
 The dashboard is automatically deployed from the `main` branch. You can view it at
@@ -60,6 +56,12 @@ ForceAllowLandscape=true
 4. Save the file then eject your Kobo eReader
 
 > **NOTE:** Line-endings must be LF. Make sure that DeveloperSettings, FeatureSettings or Browser are not duplicated
+
+## Testing
+
+To preview the dashboard for a specific date, append the `today` query parameter
+to the URL. For example `index.html?today=2025-08-22` renders the page as if the
+current day was 22nd August 2025.
 
 ## Alternatives
 
