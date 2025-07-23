@@ -11,6 +11,10 @@ I built the following dashboard for my children to see what weekday and time of 
 
 ![Example dashboard](example.jpg)
 
+To preview the dashboard for a specific date, append the `today` query parameter
+to the URL. For example `index.html?today=2025-08-22` renders the page as if the
+current day was 22nd August 2025.
+
 ## Design
 
 ### Why so legacy technologies?

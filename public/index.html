@@ -214,13 +214,21 @@
     </div>
 
     <script>
-        function handleRefresh() {
-            var qd = {};
-            if (location.search) location.search.substr(1).split("&").forEach(function(item) {
-                var s = item.split("="), k = s[0], v = s[1] && decodeURIComponent(s[1]); (qd[k] = qd[k] || []).push(v)
-            })
+        var qd = {};
+        if (location.search) location.search.substr(1).split("&").forEach(function(item) {
+            var s = item.split("="), k = s[0], v = s[1] && decodeURIComponent(s[1]); (qd[k] = qd[k] || []).push(v)
+        })
 
-            var refreshSeconds = qd.refresh
+        function pad(n) { return ('0' + n).slice(-2); }
+
+        function today() {
+            if (qd.today && qd.today[0]) { return qd.today[0]; }
+            var d = new Date();
+            return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+        }
+
+        function handleRefresh() {
+            var refreshSeconds = qd.refresh;
             if (!refreshSeconds) {
                 refreshSeconds = 5*60
             }
@@ -257,7 +265,7 @@
                 0: 6, // → sunday
             };
 
-            var day = weekMap[(new Date()).getDay()]
+            var day = weekMap[(new Date(today())).getDay()]
 
             var nthCell = getNthAnimalCell(day);
             if (nthCell) {
@@ -313,12 +321,6 @@
             var icon = document.getElementById('watering-icon');
             var storageKey = 'wateringDate';
 
-            function today() {
-                var d = new Date();
-                function pad(n) { return ('0' + n).slice(-2); }
-                return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
-            }
-
             function setChecked(checked) {
                 icon.className = !checked ? 'current' : undefined;
             }
@@ -342,7 +344,7 @@
         setupWateringIcon();
 
         function updateCountdown(targetDate, elementId) {
-            var now = moment.tz('Europe/Helsinki').startOf('day');
+            var now = moment.tz(today(), 'YYYY-MM-DD', 'Europe/Helsinki').startOf('day');
             var target = moment.tz(targetDate, 'YYYY-MM-DD', 'Europe/Helsinki').startOf('day');
             var diff = target.diff(now, 'days');
             var el = document.getElementById(elementId);
