@@ -14,7 +14,7 @@ I built the following dashboard for my children to see what weekday and time of 
 ## Live Page
 
 The dashboard is automatically deployed from the `main` branch. You can view it at
-[https://<your-github-username>.github.io/kobo-dashboard/](https://<your-github-username>.github.io/kobo-dashboard/).
+[https://emick.github.io/kobo-dashboard/](https://emick.github.io/kobo-dashboard/).
 
 ## Design
 
