@@ -146,6 +146,18 @@
                             <img id="watering-icon" src="images/droplet.png" alt="Water flowers">
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <div class="caption">Koulu alkaa</div>
+                            <span id="school-countdown"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="caption">Myyrät alkaa</div>
+                            <span id="moles-countdown"></span>
+                        </td>
+                    </tr>
                 </table>
             </div>
 
@@ -327,6 +339,19 @@
         }
 
         setupWateringIcon();
+
+        function updateCountdown(targetDate, elementId) {
+            var now = moment.tz('Europe/Helsinki').startOf('day');
+            var target = moment.tz(targetDate, 'YYYY-MM-DD', 'Europe/Helsinki').startOf('day');
+            var diff = target.diff(now, 'days');
+            var el = document.getElementById(elementId);
+            if (el) {
+                el.textContent = diff;
+            }
+        }
+
+        updateCountdown('2025-08-07', 'school-countdown');
+        updateCountdown('2025-08-04', 'moles-countdown');
     </script>
 </body>
 </html>
